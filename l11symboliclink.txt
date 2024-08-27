@@ -1,0 +1,105 @@
+=>Symbolic Link
+
+-folder shoutcut
+
+=>Same folder
+ls -l
+mkdir -p l11folder
+ls -l
+cd l11folder
+echo "Hello sir" > file0.txt
+ls
+cat file0.txt
+
+cd ..
+
+ln -s l11folder l11shortcut
+ls -l               // l11shortcut -> l11folder - shortcut file is link to absolute file
+cd l11shortcut          
+ls -l   
+cat file0.txt
+
+
+cd l11folder
+ls
+echo "Hello World" > file1.txt
+ls
+
+cd -
+cd l11shortcut
+ls
+cat file1.txt
+
+echo "Hello World" > file2.txt
+ls
+
+cd -
+cd l11folder
+ls
+cat file2.txt
+
+=>Remove Symbolic Link
+cd -
+rm -rf l11shortcut
+ls -l
+cd l11folder
+ls
+
+*original folder still remain 
+-----------------
+
+=Remove Original folder
+
+cd -
+ln -s l11folder l11shortcut
+ls -l
+
+cd l11shortcut
+ls
+
+cd -
+rm -rf l11folder
+ls -l                       (synbolic links change to red color)
+
+cd l11shortcut              (can't open, cuz original folder deleted)
+rm -rf l11shortcut
+-----------------
+
+=>In Different folder
+
+mkdir -p l11folder
+cd l11folder
+echo "Hello sir" > file0.txt
+ls
+cat file0.txt
+
+
+cd
+ls
+cd Desktop/
+ls -l
+ln -s l11folder l11shortcut (not working - symbolic link is created with broken link)
+ln -s ~/Documents/class/ubuntulinuxbatch1/l11folder l11shortcut
+ls -l                       ( l11shortcut ->  home/administrator/Documents/class/ubuntulinuxbatch1/l11folder )
+cd l11shortcut
+ls
+cd -
+rm -rf l11shortcut
+ls
+
+(or)
+
+Terminal: ~/Documents/Ubuntubatch1 
+ln -s l11folder ~/Desktop/l11shortcut
+cd 
+ls 
+cd Desktop
+ls 
+cd l11shortcut (not working , cuz link was l11shortcut -> l11folder)
+
+ln -s ~/Documents/class/ubuntulinuxbatch1/l11folder ~/Desktop/l11shortcut
+cd 
+ls -l
+cd l11shortcut
+-----------------
+ 

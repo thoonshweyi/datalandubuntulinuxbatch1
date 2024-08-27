@@ -1,0 +1,1818 @@
+=>Folder Navigation
+
+    . (dot)                 = This directory
+    .. (double dot)         = -refers to the directory that contains the current directory
+    cd (change directory)   = -is used to move from your current directory to another directory.
+    cd - (dash)             = -switches you back to the previous directory you were in before the last cd command. 
+    / (forward slash)       = Directory separator:  This is used to separate directories in a path. 
+
+    =>Exploring Nested Folder 
+        =>Check Current Path
+            pwd            /home/administrator
+            ls   
+            ls ..          // administrator
+            ls ../..       // bin dev lib libx32 mnt root snap sys var boot etc ...
+
+
+        ctrl+alt+t
+        ls             
+        cd Music/
+        ls
+        cd folderone/
+        ls
+        cd 1/
+        ls
+        cd ..               // 1
+        ls
+        cd ..               // folderone 'folder two'
+        ls
+        pwd                 // /home/administrator/Music
+        cd "folder two" 
+        ls
+        cd ..
+        pwd                 // /home/administrator/Music
+        cd folder\ two
+
+
+        *path are case sensitive
+        *Tab key to automatic text
+        *no need to enter directory from the starting root, can open directory from the current directory
+
+    =>Quick Go To Home Directory 
+        ctrl+alt+t
+        ls
+        cd Music/
+        ls 
+        cd folderone/
+        ls
+        cd 1/
+        ls
+        cd                  
+        pwd                           // /home/administrator
+
+
+        ctrl+alt+t
+        ls
+        cd Music/
+        ls 
+        cd folderone/
+        ls
+        cd 1/
+        ls
+        cd --               // /home/administrator ( adminstrator@hp:~$ )
+
+    =>Breadcrumb Navigation
+        ctrl+alt+t
+        ls
+        cd Music/
+        ls 
+        cd folderone/
+        ls
+        cd 1/
+        ls
+        cd -                 // /home/administrator/Music/folderone
+        cd -                 // /home/administrator/Music/folderone/1
+        cd -                 // /home/administrator/Music/folderone
+        cd -                 // /home/administrator/Music/folderone/1
+        
+        *It is useful for toggling between two directories.
+
+    =>Quick Go to Root Folder
+        ctrl+alt+t
+        ls
+        cd Music/
+        ls 
+        cd folderone/
+        ls
+        cd 1/
+        ls
+        cd /                //  / ( adminstrator@hp:/$ )
+        (Note: under Root folder)
+
+
+    
+
+    *default path is home/user (~)
+    *root path is (/)
+
+    *difference between cd -- , cd /
+    cd --
+        Under user's home
+    cd /
+        Under root
+
+=>Managing Terminal 
+    =>Clear Terminal
+
+     clear
+     ctl+m+l       (clear)
+
+     ctl+m         (New Line)
+     ctl+l         (clear)
+
+    =>Close Terminal
+        exit
+        ctl+d
+
+    =>Cursor to start char in Terminal
+        ctl+a
+
+    =>Cursor to end char in Terminal
+        ctl+e
+
+=Managing Commands
+    =>Find used commands again
+        ctl+r
+        enter (if you want to use)
+        ctl+g (if you wan to cancle)
+    
+    =>Command Callback
+        Press up arrow key       (callback)
+        Press down arrow key     (callback)
+        !!                       (callback last command and run again)
+        history                  (see all commands history)
+        hitory 5                 (see last 5 commands history) * last five comands
+        !1453                    (callback history form commands history and run again)
+        !1457:p                  (get command from commands history just print )
+        history -c               (clear all history)
+
+
+    =Diff 'clear' and 'history -c'
+        clear - clearn user interface / command on terminal 
+        history -c 
+
+=wget 
+    wget https://storage.googleapis.com/pod_public/1300/150537.jpg
+    ls
+
+    *image will downloaded to the current directory
+
+=>Folder 
+    =>Create Folder or Create Directory
+        mddir =   make directory 
+
+        mkdir myfolder1
+        mkdir myfolder1     *error(mkdir: cannot create directory ‘folder1’: File exists)
+        mkdir -p myfolder2  (no error if existing, make parent directories as needed)
+        mkdir -p myfolder3/
+        cd myfolder3
+        mkdir -p myfolder4
+        cd -
+        
+        =>Simultaneously creating multiple folders 
+            mkdir -p myfolder5/myfolder6/myfolder7 
+            
+            mkdir myfolder8
+            mkdir myfolder9/myfolder10      *error(mkdir: cannot create directory myfolder9/myfolder10 : No such file or directory)
+            mkdir -p myfolder9/myfolder10  
+
+            *-p is is needed if you created inc sub folders
+
+        ---------------------------------------------------------------------
+        Common Options
+        -p or --parents:
+
+        Description: Creates the specified directory, along with any necessary parent directories. 
+        If the parent directories do not exist, they will be created.
+
+    =>Rename Folder (mv = move files directories or renames a file directory)
+        mv myfolder10 myfolder9
+
+        Renaming a File:
+        mv oldname.txt newname.txt
+
+    =>Delete Folder or Remove Directories
+        =test.text
+        rm test.txt              (Note: -rf optional to delete files)
+        =test.text
+        rm -rf test.txt
+        
+        rm myfolder              *error (rm: cannot remove 'myfolder1': Is a directory)
+        rm -rf myfolder1         (Note: -rf need to delete directories, deletes directory forcefully.)
+
+        ---------------------------------------------------------------------
+            rm [options] file...
+            Common Options
+                -f or --force:
+                    Description: Forces the removal of files without prompting for confirmation, even if the files are write-protected.
+                    Example:
+                    This forcefully deletes file1.txt without any prompts.
+                
+                -r or -R or --recursive:
+                    Description: Recursively deletes directories and their contents.
+                    Example:
+                    rm -r my_directory
+
+        =>Removig Parent Folder
+            rm -rf myfolder3/myfolder4         (Note: only delete myfolder4)
+
+        
+            rm -rf myfolder5                   (Note: paratent folder delete will also delete sub folders)
+
+        =>Try to delete with rmdir 
+            rmdir myfolder2
+            rmdir myfolder3/
+
+            rmdir -p myfolder4/
+            rmdir myfolder7/myfolder8/myfolder9/    (Note: only delete myfolder9)
+            rmdir -p myfolder7/myfolder8/           (Note: all deleted myfolder7 and myfolder8)
+            ---------------------------------------------------------------------
+
+            rmdir [options] directory_name
+            
+            Common Options
+                -p or --parents:
+
+                Description: Removes the directory and its parent directories if they become empty after the directory is removed.
+
+    =>Copy Folder (recursive)
+        cp -r myfolder8 yourfolder8 
+        cp -r myfolder9 yourfolder9 (Note: all sub folders inclusive)
+
+        cp -r myfolder8 myfolder9
+
+        cp -r yourfolder8 yourfolder9/yourfolder10
+        *If destination directory does not exist, it wil create folder with the privided name and build replica of the orginal folder.
+        
+        cp -r yourfolder8 yourfolder9/myfolder10
+        *If destination directory exist, it will place the copy of souce folder under destination folder.
+        ---------------------------------------------------------------------
+        cp [options] source destination
+        Common Options
+        
+            -r or -R or --recursive:
+
+            Description: Recursively copies directories and their contents.
+
+        Without a trailing slash, cp creates the destination directory and copies the contents of the source directory into it.
+        With a trailing slash, cp expects the destination directory to exist and returns an error if it does not.
+        cp -r source_directory /new_directory
+        $ cp -r source_directory/ /new_directory/
+
+=>File
+    =>Identifying Linux File Types
+
+        -    = Regular File
+        d    = Directory
+        c    = Charcter Device File
+        s    = Socket File
+        p    = named pipe
+        l    = Symbolic Link
+
+    =>Create File
+
+        touch l5sample.txt
+
+    =>Create & Edit File (cat = concatenate)
+
+        cat > l5example.txt
+        hello sir....
+        what are you doing
+        ctrl+d         
+        
+        *exit from current running session not from terminal 
+
+    =>Create & Edit File
+        echo > l5sample.txt                // only create empty file 
+
+        echo "Hello Guys" > l5eg.txt       // Write string to file 
+        cat l5eg.txt
+        echo "Hello Ladies...." > l5eg.txt  
+        cat l5eg.txt                       // Overwrite the file contents
+
+    =>Read File
+        cat l5example.txt        (1 to all)
+        -from start to end of the file / all contents
+
+        (or)
+        
+        head l5example.txt       (1 to 10)
+        head -5 l5example.txt    (1 to 5)
+        head -15 l5example.txt   (1 to 15)
+
+            -from the start of the file
+        
+        (or)
+
+        tail l5example.txt       ( 15 to 6)
+        tail -5 l5example.txt    ( 15 to 11)
+        tail -15 l5example.txt   ( 15 to 1)
+
+            -from the end of the file
+
+
+    =>Check file status
+        stat l5example.txt
+
+        -to display detailed information about files and file systems.
+
+    =>Check file type
+        file l5example.txt       //  l5example.txt ASCII text
+
+    =>Update File
+
+        =>Vim editor
+            sudo apt install vim
+
+            vim
+            -to check if vim is installed 
+            -exit from vim(:q + Enter)
+
+            vim filename.fileformat (or) vi l5example.txt
+
+            vim l5example.txt
+            :q
+
+            vim l5example.txt
+            i    (-- INSERT --)
+            what are you doing 16
+            ctrl+c
+            :qa! (for exit editor = no save = quit all buffers without a warning)
+
+            vim l5example.txt
+            i    (-- INSERT --)
+            what are you doing 16
+            ctrl+c
+            :wq (for exit editor =  saved = write & quit)
+
+            Command Feature <> Writing Text Feature
+            ctrl+c for changing vim command area not text contents
+            i for Insert text
+
+        =>nano (System Default App )
+            nano filename.format
+
+            nano l5example.txt
+            what are you doing 17
+            ctrl+x
+            y (file save & exit)
+            enter
+
+        =>gedit editor (System Default App - Text Editor)
+            gedit filename.format
+
+            sudo apt install gedit
+
+            gedit l5example.txt
+
+    =>Rename File
+        mv l5example.txt l5exampletext.txt
+
+    =>Remove File
+        rm -i l5exampletext.txt  (with information before you delete y/n)
+        rm -v l5sample.txt       (show message after delete)
+        rm -rf l5sample.txt
+
+        rm myfolder8             (can't delete folder)
+        rm -rf myfolder8         (can)
+
+
+    =>Copy file
+        touch l5sample.txt
+        cp -r l5sample.txt l5samplebackup.txt
+        cp -r l5samplebackup.txt yourfolder8
+        cp -r l5sample.txt yourfolder8/
+        cp -r l5sample.txt myfolder9/myfolder10/
+
+
+    =>Move File
+        mv l5sample.txt myfolder9/myfolder8
+        mv yourfolder8/l5samplebackup.txt myfolder9/myfolder8
+
+    =>Move File & Rename File Same time
+
+        mv yourfolder8/l5sample.txt myfolder9/myfolder10/l5samplebackup2.txt
+
+=>Pipe ( | )
+    ls                  //   -list
+    ls -l               //   - vertical display (-l = long listing, display lots of information)
+    ls -lh              //   - h = human formatted (diplay file size in a human-readable format)
+    ls -lh | head       //   - Pipe (|)
+    ls -lh | head -3    //   - first limited lines including -total filesize- line
+    ls -lh | tail       //   - last 10 lines in the lists
+    ls -lh | tail -2    //   - last limited lines in the lists
+    
+    ls -lF              (-F = Distinguish directories and files in linux)
+    ls -lS              (-S = sort file by file size, biggest to smallest size)
+    ls -l               (list order by name, a to z )
+    ls -lt              (order by time, z to a )
+    ls -l --full-time   (show by full time )
+
+    ---------------------------------------------------------------------
+
+        ls [options] [file...]
+        
+        -l:
+        Common Options
+        Description: Displays detailed information about each file and directory in a long format, including permissions, number of links, owner, group, size, and modification time.
+        
+        -h or --human-readable:
+        Description: Displays file sizes in a human-readable format (e.g., K, M, G).
+
+        _____________________________________________________________________
+        command1 | command2
+        
+        command1: The command that produces output.
+        command2: The command that takes the output of command1 as its input.
+
+        the pipe symbol (|) is used to pass the output of one command as input to another command. This allows for the creation of powerful command chains and workflows by combining simple commands in a flexible and efficient manner.
+
+=>Check all history in .bash_history file
+    ctl+alt+t
+    ls
+    ls -l
+    ls -a                  - all file (hidden file included)
+    ls -l -a
+    ls -la or ls -al
+    ls -lah or ls -alh
+    cat .bash_history
+    vim .bash_history
+        ctl+c
+        :qa
+
+    *all command written in terminal
+    *Not related to history command
+
+=>Invisible step in command history
+    ls -l -a
+    history
+     ls -la
+    history
+    cd
+    cd
+    cd
+    cd
+    cd
+    history
+
+    - prefix space command is not recorded in history
+    - if type many times ! history recorded only one time
+
+=>Zip & Unzip 
+    =>UI feature for quick zip, unzip
+        Right Click > Compress
+        Right Click > Extract
+
+
+        *While extracting,
+            Single file, Directly taken out
+            Multi file, Wrapping under zipfilename(archive) folder
+    =>Zip 
+        zip l1samplezip.zip l1intro.txt
+        zip l5sample.zip l5example.txt l5file.txt l5sample.txt
+        zip l3sample.zip l3history.txt l4folder.txt myfolder9 yourfolder8
+        zip allfile.zip *        (* all/any)
+
+    =>Unzip (Extract Zip)
+        mkdir -p myzip
+        cp -r allfiles.zip myzip/
+        cd myzip
+        ls
+        du -h               (disk use)
+        du -h allfile.zip         
+
+        unzip allfile.zip
+
+        *Can't read zip file
+        *Directly pull out all files and folder under zip file
+
+
+    =>tar 
+        (
+            c = tar to create a new archive
+            v = set the screen output to verbose then will update
+            f = points to the filename then want to archive
+        )
+
+        tar cvf l1example.tar l1intro.txt 
+        tar fvc l5sample.tar l5example.txt l5file.txt l5sample.txt
+        tar fcv allfiles.tar *
+
+        *zip file is more light weight
+        *tar file is heavier than zip file
+
+        ---------------------------------------------------------------------
+            c:
+            Description: This stands for "create." It tells tar to create a new archive file.
+
+            v:
+            Description: This stands for "verbose." It makes tar show the progress of the archive creation by listing the files being added to the archive.
+
+            f:
+            Description: This stands for "file." It indicates that the next argument is the name of the archive file to create.
+
+
+        =>Extract tar
+            cp -r l1example.tar myzip/
+            cd myzip
+            ls
+            du -h l1example.tar
+            tar -xvf l1example.tar
+            
+            ---------------------------------------------------------------------
+            x:
+            Description: This stands for "extract." It tells tar to extract the contents of the archive.
+
+            v:
+            Description: This stands for "verbose." It makes tar show the progress of the extraction by listing the files being extracted.
+
+            f:
+            Description: This stands for "file." It indicates that the next argument is the name of the archive file to be extracted.
+
+
+    =>gzip
+        a > a.tar > a.tar.gz
+        -can not compress to gzip directly
+        -firstly compress to tar file
+
+        du -sh l1example.tar
+        gzip -v l1example.tar
+        du -sh l1example.tar.gz // l1example.tar : 97.3 % replaced with l1example.tar.gz
+
+        *It is more lighter thant zip
+
+    =>gunzip (Extract gzip)
+        gunzip -v l1example.tar.gz
+
+        =>Extract tar
+            tar xvf l1example.tar
+
+=>Find 
+    -find file
+
+    ctrl+alt+t
+    find 
+    ctrl+c (to stop finding)
+    *It take a little bit of time cuz there are my files under user's home folder
+
+    Terminal: ~/Documents/Ubuntubatch1
+    find .
+    *It is quicker than scanning in homefolder cuz it quikly scan in specific folder
+
+
+    find -name l5file.txt           
+    find -name l5file.txt
+    find -name "*l5file*"
+    find -name "l5file*"
+    find -name "*l5file"     (no result - because it end with .txt extension not l5file)
+
+    *Diff result depending on directory
+        find -name l5file.txt           
+            Terminal: ~/Documents/Ubuntubatch1      (./l5file.txt)
+            ctrl+alt+t                              (./Documents/ubuntulinuxbatch1/l5file.txt
+                                                     ./.local/share/Trash/files/l5file.txt          
+                                                    )*find the whole system
+    ---------------------------------------------------------------------
+
+    The find command in Unix-like operating systems is a powerful utility used to search for files and directories within a directory hierarchy.
+        Searching by Name: -name
+            Description: Search for files and directories by name.
+
+=>locate (need to install)
+
+    sudo apt install plocate
+
+    cd /var/lib/plocate
+    ls                      // CACHEDIR.TAG     plocate.db
+    cat plocate.db           (cat: plocate.db: Permission denied)
+    sudo cat plocate.db      (binary data)
+
+    sudo updatedb            (refresh database to recognize the file and folder structure on the machine by the system)
+
+    locate l5file
+    locate -i l5file            (-i mean = no case sensitive)
+    locate -i 'l5file'
+
+    locate -i "l5file.txt"
+    locate "l5file.txt"
+    locate "L5file"         (no result)
+    locate -i "L5file"
+
+    locate -i "*l5file*"
+    locate -i *l5file*
+    locate -i "*l5file"     (no result)
+    locate -i "l5file*"     (no result)
+    locate -i l5file*
+    ---------------------------------------------------------------------
+    *Same result on home dir and precise dir
+        locate -i l5file   
+            Terminal: ~/Documents/Ubuntubatch1      
+            ctrl+alt+t 
+
+        (
+            /home/administrator/.local/share/Trash/files/l5file.txt
+            /home/administrator/.local/share/Trash/info/l5file.txt.trashinfo
+            /home/administrator/Documents/class/buntulinuxbatch1/l5file.txt
+        )
+    
+    updatedb: This command updates the database that the locate command uses to find files on the file system. 
+    updatedb scans the file system and records the locations of all files, storing this information in a database file, typically located at /var/lib/mlocate/mlocate.db.
+
+=>tree
+
+    sudo apt install tree
+
+    Terminal: ~/Documents/Ubuntubatch1 
+    ls -l
+    tree
+
+    cd myzip/
+    ls -l
+    tree
+
+    tree -d        = List directories only (folder only)
+    tree -C        = colorize output
+    tree --color   = colorize output
+
+    ls --color     = colorize output
+
+=>which (can show installed application located)
+
+    which ls            = /usr/bin/ls
+    which cat           = /usr/bin/cat
+    which vi            = /usr/bin/vi
+    which vim           = /usr/bin/vim
+    which nano          = /usr/bin/nano
+
+    which zoom          = /usr/bin/zoom
+    which plocate       = /usr/bin/plocate
+
+    *can be used to double check if applicaltion is actually installed.
+    ---------------------------------------------------------------------
+    The which command in Unix-like operating systems is used to locate the executable file associated with a given command by searching through the directories listed in the user's PATH environment variable. It returns the path to the executable that would have been executed if the command had been entered at the command line.
+
+    which [options] command
+
+=>Symbolic Link
+    -folder shoutcut
+
+    =Openning wrong file issue 
+        -lessons folder on D: 
+        -practice folder on Desktop:
+
+        *error (editing code on practice folder and opening code from live lesson folder)
+        *two copy folders are not related, thy are just same name.
+        *These files are absoulete files.
+
+    =>Creating Symbolic link under same folder
+        -Exact edition of master folder
+        
+        ls -l
+        mkdir -p l11folder
+        ls -l
+        cd l11folder
+        echo "Hello sir" > file0.txt
+        ls
+        cat file0.txt
+
+        cd ..
+
+        ln -s l11folder l11shortcut
+        ls -l               // l11shortcut -> l11folder - shortcut file is link to absolute file
+        cd l11shortcut          
+        ls -l   
+        cat file0.txt 
+
+        ---------------------------------------------------------------------
+        The ln command in Unix-like operating systems is used to create links between files.
+
+        =>Adding folder under master folder 
+            cd l11folder
+            ls
+            echo "Hello World" > file1.txt
+            ls
+
+            cd -
+            cd l11shortcut
+            ls
+            cat file1.txt
+        
+        =>Adding folder under reference folder 
+            echo "Hello World" > file2.txt
+            ls
+
+            cd -
+            cd l11folder
+            ls
+            cat file2.txt
+
+        =>Remove Symbolic Link
+            cd -
+            rm -rf l11shortcut
+            ls -l
+            cd l11folder
+            ls
+
+            *master folder still remain unchanged 
+
+        =Remove Original folder
+
+            cd -
+            ln -s l11folder l11shortcut
+            ls -l
+
+            cd l11shortcut
+            ls
+
+            cd -
+            rm -rf l11folder
+            ls -l                       (synbolic links change to red color)
+
+            cd l11shortcut              (can't open, cuz original folder deleted)
+            rm -rf l11shortcut
+
+    =>Creating Symbolic link under different folder
+        mkdir -p l11folder
+        cd l11folder
+        echo "Hello sir" > file0.txt
+        ls
+        cat file0.txt
+
+
+        cd
+        ls
+        cd Desktop/
+        ls -l
+        ln -s l11folder l11shortcut (not working - symbolic link is created with broken link)
+        ln -s ~/Documents/class/ubuntulinuxbatch1/l11folder l11shortcut
+        ls -l                       ( l11shortcut ->  home/administrator/Documents/class/ubuntulinuxbatch1/l11folder )
+        cd l11shortcut
+        ls
+        cd -
+        rm -rf l11shortcut
+        ls
+
+        (or)
+
+        Terminal: ~/Documents/Ubuntubatch1 
+        ln -s l11folder ~/Desktop/l11shortcut
+        cd 
+        ls 
+        cd Desktop
+        ls 
+        cd l11shortcut (not working , cuz link was l11shortcut -> l11folder)
+
+        ln -s ~/Documents/class/ubuntulinuxbatch1/l11folder ~/Desktop/l11shortcut
+        cd 
+        ls -l
+        cd l11shortcut
+
+=>File Permission
+    ls -l
+
+    drwxrwxr-x 2 administrator administrator 1239 Feb 21 23:03 l11symboliclink.txt
+
+    drwxrwxr-x    = permission
+    2              = numbers of links
+    administrator  = Owner name
+    administrator  = Group name   
+    4096           = Number of bytes in file           
+    Feb 21 22:35   = Last modification time
+    l11symboliclink.txt = File name
+
+    Note 
+    -   File
+    d   directory
+    . The directory
+    .. The parent directory
+    
+
+    => Link checking 
+
+        ls -l               // 2 links in l11folder
+        cd l11folder        
+        ls -la              // ., .., file0.txt
+
+        cd -
+
+        ls  -l              // 3 links in yourfolder9
+        cd yourfolder9      
+        ls -l               // myfolder10
+        ls -la              // ., .., myfolder10 (3 links in myfolder10)
+
+        cd myfolder10
+        ls                  // yourfolder8
+        ls -la              // ., .., yourfolder8 (2 links in yourfolder8)
+
+        cd yourfolder8      
+        ls
+        ls -la              // ., ..
+
+        *only count the sub folder links
+
+
+    =>File Permissions keywords
+
+        Read (r)       = 4       allows a file to read
+        Write(w)       = 2       allows a file to modified
+        Execute (x)    = 1       allows the execution of a file 
+
+        ---------------------------------------------------------------------
+        Meaning of r, w, and x
+        r (Read):
+            For files: Grants permission to read the file's contents.
+            For directories: Grants permission to list the contents of the directory.
+            Numeric value: 4
+        w (Write):
+            For files: Grants permission to modify the file's contents.
+            For directories: Grants permission to add, delete, or rename files within the directory.
+            Numeric value: 2
+        x (Execute):
+            For files: Grants permission to execute the file as a program.
+            For directories: Grants permission to enter the directory and access its contents.
+            Numeric value: 1
+
+
+    =>Permission Categories
+
+        Category       Symbol
+        ---------------------
+        User           u
+        Group          g
+        Other          o
+        All            a
+
+    =>Changing Permission
+
+        Item           Meaning
+        --------------------------------------------
+        chmod          Change mode command 
+        ugoa           user group other all 
+        +-=            Add, Sustract, Set permission 
+        rwx            Read,Write,Execute
+
+    =>Directory Listing Attributes
+
+        numberic value      4 (read)       2 (write)      1 (execute)         Permission Name
+        0                   -              -              -                   no permission
+        1                   -              -              x                   execute only
+        2                   -              w              -                   write only
+        3                   -              w              x                   write and execute
+        4                   r              -              -                   read only
+        5                   r              -              x                   read and execute
+        6                   r              w              -                   read and write
+        7                   r              w              x                   read,write and execute 
+
+    =Describing permissions
+        d or -         rwx            rwx       rwx
+        type           user/owner     group     other     
+
+        -rwxrwxr-x 2 administrator administrator 1239 Feb 21 23:03 l11symboliclink.txt
+
+
+    =>Commonly Used Permission
+        Symbolic                      Otcal
+        -rwx------                    700
+        -rwxr-xr-x                    755
+        -rw-rw-r--                    664
+        -rw-rw----                    660
+        -rw-r--r--                    644
+        -rwxrwxrwx                    777
+
+=>Listing File by Type 
+
+    ls -l 
+    ls -F          // l11shortcut@
+    ls -lF 
+
+    Symbol         Meaning
+    /         =    Directory 
+    @         =    Link  
+    *         =    Executable  
+
+=>man  (Such as Help or Browser or Documentation )
+
+    ctl+alt+t
+    man ls
+    man mkdir
+    man vim 
+    man cat 
+
+    q (q = quit )
+
+=>For Shutdown 
+    sudo poweroff 
+
+=>For restart (reboot)
+    sudo reboot
+
+=>User
+    =>Check Current User 
+        who         // administrator seat0 2024-02-28 19:40 (login screen)
+                    administrator :1 2024-02-28 19:40 (:1)
+        whoami      // administrator
+
+    =>Check Host Name 
+        hostname        // administrator - device name
+
+    =>Check Host Name 
+        hostname            // administrator // - device name
+        cat /etc/hostname   // administrator
+
+        =>Change Host Name 
+            hostnamectl             // Window Mycomputer > right click > Properties
+            hostnamectl set-hostname KOTHA-PC 
+            hostname             // KOTHA-PC 
+            sudo reboot 
+
+    =>Server Uptime
+        uptime              // 16:19:30 up 16 min, 1 user, load average: 0.06, 0.10, 0.11
+                            //              onduration, concurrent user login count, cpu usage
+        top                 // Window - task manager
+        ctrl+c (exit) 
+
+        w
+
+        sudo apt-get install glances
+        glances
+        ctrl+c (exit) 
+
+    =>Check 32bit processor or 64bit processor 
+        uname -a                    // Linux administrator 6.2.0-39-generic #40-Ubuntu SMP Wed Jun 2 23:20:28 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+        uname -i or uname -m        // x86_64
+        getconf LONG_BIT            // 64
+
+    =>Check Ubuntu Version 
+        hostnamectl              // detail info....
+        cat /etc/os-release      // detail info....
+        cat /etc/issue           //Ubuntu 22.04.3 LTS \n \l
+    
+    =>Upgrade New OS Version 
+        hostnamectl 
+        do-release-upgrade -c (Check for a new Ubuntu release version before upgrade)
+        sudo do-release-upgrade (upgrade)
+
+    =>Login as Root User 
+        apt-get update // l3: Permission denied 
+
+        sudo -s 
+        (Enter administrator user password  )     // root@administrator: /home/administrator#
+        apt-get update 
+        exit 
+
+        (or)
+        sudo su 
+        apt-get update
+        whoami         // root 
+        exit 
+
+    =>Setpassword or Changing root's password 
+        sudo passwd root 
+        new password : 123456789
+        return new passwoard : 123456789
+
+
+    =>Login as Root User 
+        =Method 1
+            sudo -s             // root@administrator:/home/administrator# (don't need to write password)
+            whoami              // root
+            exit
+
+        =Method 2
+            sudo su             // root@administrator:/home/administrator# (don't need to write password)           
+            whoami
+            exit
+
+        =Method 3
+            su                      // root@administrator:/home/administrator# (at /home/administrator)
+            password: 123456789
+            whoami
+            exit
+
+            cd 
+            ls                      // snap 
+            cd snap
+            ls
+
+        =Method 4           (su = switch user)
+            su -                    // root@administrator:~#  (at /root folder)
+            password: 123456789
+            whoami
+            su administrator
+
+            ls                      // snap 
+
+        ---------------------------------------------------------------------
+
+        The sudo command in Unix-like operating systems allows a permitted user to execute a command as the superuser (root) or another user, as specified by the security policy. The sudo command is commonly used to perform administrative tasks, which require higher privileges than those granted to a normal user.
+
+        How sudo Works
+        User Authentication:
+
+        When you run a command with sudo, you may be prompted to enter your user password. This is to authenticate that you have the necessary permissions to execute the command with elevated privileges.
+        Privileges:
+
+        Once authenticated, sudo grants temporary elevated privileges to run the specified command as the superuser or another specified user.
+        Security Policies:
+
+        The /etc/sudoers file defines the rules and permissions for which users can run which commands via sudo. It specifies who can use sudo and what commands they are allowed to run.
+
+    =>Changing Password of Current User 
+
+        su
+        password: 123456789
+        whoami
+
+        passwd 
+        Current password: 123456789
+        New password: 123456789abc
+        Retype new password: 123456789abc
+
+        su
+        password: 123456789             // su: Authentication failure 
+        su
+        password: 123456789abc   
+
+    =>Create New User Account
+        =Method 1
+            sudo useradd user1       (just created account, without user1 folder)
+
+            whoami 
+            ls 
+            cd /
+            ls 
+            cd home 
+            ls              (administrator)
+            cd administrator
+            ls
+
+        =Method 2
+            sudo useradd user2 -m    (cd /, cd home, ls = you will see system created user2 folder in under home folder)
+
+            ls 
+            cd /
+            ls 
+            cd home
+            ls              (administrator user2), this user2 is folder not user acc
+
+    =>Display all users 
+        compgen -u                                   (only username)
+        getent passwd (or) cat /etc/passwd            (all info)
+        
+        ---------------------------------------------------------------------
+        
+        The getent passwd command retrieves and displays entries from the password database. This database typically includes information about user accounts.
+
+        This command outputs a list of all user accounts on the system, with each line representing a single user. The format of each line is similar to the content of the /etc/passwd file:
+        username:x:uid:gid:gecos:home_directory:shell
+
+    =>Display single user
+        getent passwd user1      (single user all info)
+        id                       (current login user group detail info) // uid=1000(administrator) gid=1000(administrator) groups=1000(administrator),27(sudo)
+        id user1                 (single user group info)               // uid=1001(user1) gid=1001(user1) groups=1001(user1)
+        ---------------------------------------------------------------------
+
+        id is to display the user ID (UID) and group ID (GID) of a specified user, or the current user if no user is specified. It provides information about the user’s identity and group memberships.
+
+    =>Set new user password in terminal
+        sudo passwd user1 
+        New password : 123456789
+        Retype new passwoard : 123456789
+
+        sudo passwd user2 
+        New password : 123456789
+        Retype new passwoard : 123456789
+
+        sudo passwd user3 
+        New password : 123456789
+        Retype new passwoard : 123456789
+    =>Switch user in terminal 
+        su user1
+        passwod : 123456789
+        whoami                  // user1 
+        exit 
+
+        su user2
+        passwod : 123456789
+        whoami                  // user2
+        exit 
+
+    =Homeless user testing 
+        ls -l 
+        su user1 
+        assword: 123456789
+        whoami                  
+        cd /
+        ls 
+        cd home 
+        ls -l
+        cd administrator            // error can't access (cd: an't cd to administrator)
+        cd user2                    // error can't access (cd: an't cd to user2)
+        mkdir user1                 // error (mkdir: cannot create directory 'user1': Permission denied)
+        ls 
+        exit
+
+    =Home user testing 
+        ls -l 
+        su user2 
+        password: 123456789
+        whoami 
+        cd /
+        ls 
+        cd home 
+        ls -l
+        cd administrator              // error can't access
+        cd user3                      // error can't access
+        cd user2
+        mkdir userfolder2              
+        echo "Hello" > file0.txt
+        ls 
+        exit
+
+        ls -l 
+        su user3 
+        password: 123456789
+        whoami 
+        cd /
+        ls 
+        cd home 
+        ls -l
+        cd administrator              // error can't access
+        cd user2                      // error can't access
+        cd user3
+        mkdir userfolder3              
+        echo "Hello" > file0.txt
+        ls 
+        exit
+
+    =>Delete User 
+        =Method1
+            sudo deluser user2  (or) sudo userdel user1     (delete user without deleting user files and directories) 
+
+        =Method2
+            sudo deluser --remove-home user3                (delete user by deleting user files and directories under home folder)
+
+
+        id user2            // id: 'user2': no such user
+        compgen -u      
+        cd /
+        ls
+        cd home 
+        ls -l               (result = remain only administrator user2 folders)
+
+
+    =>Diff adduser & useradd
+        sudo useradd user1  (without message/ without password/ without info)
+        compgen -u 
+
+        sudo adduser user2 (with message/ with password/ with info)
+        compgen -u 
+
+        *don't
+        sudo adduser user3 -m 
+
+        sudo useradd user3 -m 
+        compgen -u 
+        =sudo passwd user3
+        New password = 123456789
+        Retype new password = 123456789
+        =su suer3 
+        password = 123456789
+        whoami      // user3
+        exit 
+        whoami      // administrator
+
+    =>Lock or Unlock 
+        sudo passwd -l user3          (Lock)
+        sudo passwd -u user3          (Unlock)
+        
+        =sudo passwd -l user3 
+        su suer3 
+        password = 123456789          (su: Authentication failure) - password aleardy changed by the system in background
+        whoami          // administrator
+
+        =sudo passwd -u user3
+        su suer3 
+        password = 123456789          (- password already resetd by the system in background)
+        whoami          // user3
+        exit 
+
+    =>Rename User 
+        compgen -u
+        sudo useradd user4 -m       // create user          sudo useradd user5 -m 
+        sudo passwd user4           // create passwod       sudo passwd user5   
+        new passwod: 123456789
+        retype new password: 123456789 
+
+        whoami
+        cd /
+        ls
+        cd home 
+        ls -l
+        cd
+
+        su user4                su user5
+        passwod = 123456789
+        whoami 
+        exit 
+        whoami
+
+        =Method1            (user name changed - but home/directory will not change)
+        sudo usermod -l user40 user4 
+
+        =Method1            (user name changed - but home/directory will change)
+        sudo usermod -l user50 -d /home/user50 -m user5 
+
+        cd /
+        ls
+        cd home 
+        ls -l
+        cd
+        *result 
+        drwxr-x---  2   user40  user4               user4       // home folder didn't change 
+        drwxr-x---  2   user50  user5               user50      // hoome folder changed
+
+        su user40                
+        passwod = 123456789
+        whoami 
+        exit 
+        whoami                  cd  pwd (/home/user4)
+
+        su user50                
+        passwod = 123456789
+        whoami 
+        exit 
+        whoami                   cd  pwd (/home/user50)
+
+        compgen -u  (user40 user50)
+
+=>Group 
+
+    =>Display all group 
+        compgen -g               (only group name)
+        getent group             (group name and group id)
+        cat /etc/group           (group name and group id)
+
+        *result
+        user1:x:1001:
+        user1:x:1002:
+        user1:x:1003:
+
+    =>Create Group 
+        sudo groupadd group1  (without message)      (or)        sudo addgroup group2 (with message)
+        compgen -g
+        getent group
+
+        *result
+            group1:x:1004:
+            group2:x:1005:
+
+    =>Create a new group with a specific group id
+
+        sudo groupadd -g 3000 group3
+        getent group 
+
+        *result
+            group3:x:3000:
+
+        (don't)
+        sudo addgroup -g 4000 group4
+        getent group 
+
+        sudo groupadd -g 4000 group4
+        sudo groupadd group5
+        getent group                       (group5:x:4001:)
+        sudo groupadd group6
+        getent group                       (group6:x:4002:)
+
+    =>Delete Group 
+        sudo delgroup group6               (with message) (or) sudo groupdel group5 (without message)
+        getent group 
+    
+    =>Created user into group 
+        getent passwd
+        getent group 
+
+        sudo adduser user1 group1
+        sudo adduser user1 group2
+
+        (don't)
+        sudo useradd user2 group1
+
+        sudo adduser user2 group1
+        sudo adduser user4 group1               (adduser: The user `user4' does not exist.)
+    
+    =>Check user's group 
+        groups user1                            (user1 : user1 group1 group2)
+        cat /etc/group                          
+        cat /etc/group | grep user1             
+
+            *result
+            user1:x:1001:
+            group1:x:1004:user1,user2
+            group2:x:1005:user1
+
+        groups user2                            (user2 : user2 group1)
+        **cat /etc/group | grep user2             
+
+            *result
+            user2:x:1002:
+            group1:x:1004:user1,user2
+
+    =>Check group's user 
+        getent group 
+        **getent group group1                     (group1:x:1004:user1,user2)
+        cat /etc/group 
+        cat /etc/group | grep group1            (group1:x:1004:user1,user2)
+        cat /etc/group | grep group2            (group2:x:1005:user1)
+
+    =>Using libraries to see group members 
+        sudo apt-get install members
+        members group1          (user1 user2)
+        members group2          (user1)
+
+    =>Add a user to multiple group 
+        sudo usermod -aG group2,group3,group4 user2
+        getent group 
+
+    =>Remove user from group 
+        sudo gpasswd -d user2 group3
+        getent 
+        sudo gpasswd -d user2 group4
+        getent 
+
+    =>Add a user to multiple group 
+        sudo usermod -aG group2,group3,group4 user2
+        getent group 
+        ---------------------------------------------------------------------
+        The usermod  is used to modify a user's account properties. 
+        This command allows administrators to change various attributes of a user account, such as the user's home directory, login name, password expiration settings, group memberships, and more.
+    
+        -aG GROUPS:
+
+        Description: Add the user to supplementary groups without removing them from other groups. Commonly used with -a (append).
+        Example:
+        usermod -aG sudo,admin john
+
+    =>Remove user from group 
+        sudo gpasswd -d user2 group3gpasswd
+        getent 
+        sudo gpasswd -d user2 group4
+        getent 
+        ---------------------------------------------------------------------
+        The gpasswd command is used to administer /etc/group and /etc/gshadow. 
+        It allows an administrator to set or change group passwords, manage group memberships, and assign group administrators.
+
+        -d USER:
+
+        Description: Remove a user from the grou
+
+    =>Rename Group 
+        compgen -g 
+        getent group group4
+        sudo groupmod -n group40 group4
+        compgen -g 
+        
+        ---------------------------------------------------------------------
+        -is used to modify the properties of a group. This command allows administrators to change various attributes of a group, such as its name or group ID (GID).
+        -n NEW_GROUP_NAME:
+
+        Description: Change the name of the group.
+        groupmod -n devs developers
+
+
+=>Check Date 
+
+    date        // Wed Mar 27 10:44:25 PM +0630 2024
+    date -u     // Wed Mar 27 04:15:05 PM UTC 2024
+
+    *important because user action timestapm are recored as server time in database
+
+    date +"%T"  // 22:46:41
+
+    date +"%d"  // 27
+    date +"%D"  // 03/27/24
+    date +"%F"  // 2024-03-27
+    date +"%m"  // 03
+    date +"%y"  // 24
+    date +"%Y"  // 2024
+    date +"%d-%m-%y"    // 27-03-2024
+
+
+    timedatectl     
+            *result 
+            Local time: Sat 2024-07-13 10:25:45 UTC
+            Universal time: Sat 2024-07-13 10:25:45 UTC
+            RTC time: Sat 2024-07-13 10:25:45
+            Time zone: UTC (UTC, +0000)
+            System clock synchronized: yes
+            NTP service: active
+            RTC in local TZ: no
+
+    =>Using cal 
+        sudo apt install ncal 
+        cal 
+        cal 2024
+        cal 2 2022
+
+=>File Permission By Owner
+
+    compgen -u
+
+    sudo useradd user10 -m
+    sudo passwd user10
+    new password = 123456789
+    retry new password = 123456789
+
+    =>Fail attempt of Equal level user to access user's homefolder
+        whoami         // administrator 
+        cd / 
+        ls 
+        cd home 
+        ls -l 
+        cd uder10      // bash: cd: user10: Permission denied
+        exit 
+
+    =>Root accessing user's home folder
+        su - 
+        password: 123456789abc
+        whoami         // root 
+        cd /
+        ls 
+        cd home 
+        ls -l 
+        cd user 10     // can access 
+        pwd            // /home/user10
+        exit
+    
+    =>User access she own folder
+        su user10 
+        password: 123456789
+        whoami    // user10 
+        cd /
+        ls 
+        cd home 
+        ls -l 
+        cd user 10          // can access 
+        pwd                 // /home/user10
+        cd / 
+        exit 
+    
+    =>Fail attempt of Equal level user to change permisisons of user's homefolder
+
+        whoami
+        cd / 
+        cd home 
+        ls -l
+        cd user10           // bash: cd: user10: Permission denied
+        chmod g-x user10    // chmod: changing permissions of "user10": Operation not permitted
+
+        *because current user can't even accesss others home folder 
+    =>remove permission
+        su user10 
+        123456789
+        whoami    // user10 
+
+        =remove group permission
+            cd /
+            ls 
+            cd home 
+            ls -l                       // drwxr-x--- 2 user10 user10 4096 Feb 21 23:03 user10
+            chmod g-r user10
+            chmod g-w user10
+            chmod g-x user10
+            ls -l                       // drwx------ 2 user10 user10 4096 Feb 21 23:03 user10
+
+            cd user10 // can access 
+            pwd
+            cd / 
+            cd home 
+            ls -l 
+            whoami    // user10 
+
+        =remove other permission
+            chmod o-r user10
+            chmod o-w user10
+            chmod o-x user10
+
+            cd user10 // can access 
+            pwd 
+            cd / 
+            cd home 
+            ls -l 
+            whoami    // user10 
+
+        =remove user permission
+            chmod u-r user10 // can access 
+            chmod u-w user10 // can access 
+            chmod u-x user10 // can't cd to user10 
+
+            ls -l 
+            cd user10       // 
+            pwd 
+            cd / 
+            cd home 
+    
+    =>Add Permission 
+        whoami    // user10 
+
+        =add other permission
+        chmod o+r user10 
+        chmod o+wx user10 
+        ls -l                       // d------rwx 2 user10 user10 4096 Feb 21 23:03 user10
+
+        =add group permission 
+        chmod g+rwx user10 
+        ls -l                       // d---rwxrwx 2 user10 user10 4096 Feb 21 23:03 user10
+
+        =add user permission
+        chmod u+r user10 
+        chmod u+wx user10 
+        ls -l                       // drwxrwxrwx 2 user10 user10 4096 Feb 21 23:03 user10
+
+
+        cd user10 // can access 
+        pwd 
+        cd / 
+        cd home 
+
+    =>Remove All Permission (Per)
+        whoami    // user10 
+        chmod a-r user10                   // d-wx-wx-wx 2 user10 user10 4096 Feb 21 23:03 user10
+        chmod a+w user10                   // d--x--x--x 2 user10 user10 4096 Feb 21 23:03 user10
+        chmod a+x user10                   // d--------- 2 user10 user10 4096 Feb 21 23:03 user10
+        ls -l 
+
+    =>Add All Permission 
+        whoami    // user10 
+        chmod a+r user10 
+        chmod a+w user10 
+        chmod a+x u
+        ls -l 
+
+    =>Remove/Add All Permission 
+        whoami    // user10 
+        chmod a-rwx user10
+        ls -l 
+        chmod a+rwx user10 
+        ls -l 
+
+    =Only owner access testing
+        exit 
+        cd /
+        cd home/
+        ls -l 
+        cd user10
+        ls 
+        mkdir folder1byadmin
+        ls 
+        cd 
+        
+        su user10
+        password: 123456789
+        chmod g-rwx user10
+        ls -l 
+        exit 
+
+        whoami              // administrator
+        cd /
+        cd home 
+        ls -l 
+        cd user10 
+        ls 
+        mkdir folder2byadmin 
+        ls 
+        cd 
+
+        su user10 
+        passwod: 123456789
+        chmod o-rwx user10
+        ls -l 
+        exit 
+
+        whoami              // administrator
+        cd /
+        cd home 
+        ls -l 
+        cd user10           // bash: cd: user10: Permission denied
+
+
+    =>Files Permission for Group Members
+
+        compgen -u
+        compgen -g 
+
+        su user10
+        passwod: 123456789
+        cd /
+        cd home 
+        ls -l 
+        chod g+rwx user10
+        exit
+
+        su user2
+        passwod: 123456789
+        cd /
+        cd home 
+        ls -l
+        cd user10      // Permisson denied
+        exit 
+
+        compgen -g
+        groups user10            (check owner)
+        getent group user10
+        members user10           
+
+        sudo adduser user2 user10
+
+        getent group user10
+        members user10           // user10 user2
+
+        su user2
+        123456789
+        cd /
+        cd home 
+        ls -l
+        cd user10     
+        ls 
+        mkdir folder3byuser2
+        ls
+        rm -rf folder2byadmin
+        ls
+        exit 
+
+        sudo gpasswd -d user2 user10
+        members user10 
+
+        su user2
+        123456789
+        cd /
+        cd home 
+        ls -l
+        cd user10           // Permisson denied
+        exit 
+
+    =>Users on same group 
+        sudo addgroup mygroup (with message)  (or) sudo groupadd mygroup (without message) 
+        compgen -g
+        groups mygroup      // (see owner) groups: 'mygroup': no such user 
+
+        getent group mygroup          // mygroup:x:4003
+        members mygroup
+
+        sudo adduser user10 mygroup   
+        sudo adduser user2 mygroup   
+
+        getent group mygroup          // mygroup:x:4003:user10,user2       
+        members mygroup               // user10 user2
+
+        su user10
+        passwod: 123456789
+        cd /
+        cd home 
+        ls -l
+        cd user10  
+        pwd 
+        exit
+
+
+        su user2
+        passwod: 123456789
+        cd /
+        cd home 
+        ls -l
+        cd user10      // Permisson denied
+        exit     
+
+
+
+    =>Change Group Ownership (chgrp = change group ownership) (-R = Recursively, to recursively change group ownership of all files and directories under a given directory)
+
+        Syntax: sudo chgrp -R groupname directory
+        sudo chgrp -R user3 user3
+
+        su user2
+        passwod: 123456789
+        cd /
+        cd home 
+        ls -l
+        cd user10      // Permisson denied
+        sudo chgrp -R user2 user10    // user2 is not in sudoers file.
+        exit 
+
+
+        whoami         // administrator
+        cd /
+        cd home 
+        ls -l                         // drwxrwx--- 2 user10 user10 4096 Feb 21 23:03 user10
+        sudo chgrp -R user2 user10 
+        ls -l                         // drwxrwx--- 2 user10 user2 4096 Feb 21 23:03 user10
+        exit 
+
+
+        su user2
+        passwod: 123456789
+        cd /
+        cd home 
+        ls -l
+        cd user10
+        pwd 
+        exit 
+
+    =>Two way for folder access 
+        =Add user2 to group user10 
+        =Change the owner group of folder user10 to user2
+
+    =>Collecting group ownership 
+        su user3
+        passwod: 123456789
+        cd /
+        cd home 
+        ls -l
+        cd user10                // Permisson denied
+        pwd 
+        exit 
+
+        getent group mygroup          // mygroup:x:4003:user10,user2       
+        members mygroup     
+
+        sudo adduser user3 mygroup   
+
+        getent group mygroup          // mygroup:x:4003:user10,user2       
+        members mygroup               // user10 user2 user3 
+
+        whoami                        // administrator
+        cd /
+        cd home 
+        ls -l                         // drwxrwx--- 2 user10 user2 4096 Feb 21 23:03 user10
+        sudo chgrp -R mygroup user10
+        ls -l                         // drwxrwx--- 2 user10 mygroup 4096 Feb 21 23:03 user10
+
+
+        su user3
+        passwod: 123456789
+        cd /
+        cd home 
+        ls -l
+        cd user10               
+        pwd            
+        exit 
+
+    ****Group permissions must allow for group users.
+
+
+
+    whoami                        // administrator
+    cd /
+    cd home 
+    ls -l                         // drwxrwx--- 2 user10 mygroup 4096 Feb 21 23:03 user10
+    sudo chgrp -R user10 user10
+    ls -l                         // drwxrwx--- 2 user10 user10 4096 Feb 21 23:03 user10
+
+
+    su user2
+    passwod: 123456789
+    cd /
+    cd home 
+    ls -l
+    cd user10      // Permisson denied
+    exit 
+
+    =>Changing Folder Ownership 
+
+        Syntax : sudo chown -R newowner:groupname directory (chown = change file owner and group)
+
+
+        whoami                        // administrator
+        cd /
+        cd home 
+        ls -l                              // drwxrwx--- 2 user10 user10 4096 Feb 21 23:03 user10
+        sudo chown -R user2:user10 user10
+        ls -l                              // drwxrwx--- 2 user2 user10 4096 Feb 21 23:03 user10
+
+        su user2
+        passwod: 123456789
+        cd /
+        cd home 
+        ls -l
+        cd user10   
+        exit 
+        ---------------------------------------------------------------------
+
+        is used to change the ownership of files and directories. I
+        chown [options] USER[:GROUP] FILE(s)
+            USER: The new owner of the file or directory.
+            GROUP: The new group associated with the file or directory. If omitted, the group is not changed.
+            FILE(s): The file(s) or directory(ies) whose ownership you want to change.
+            options: Additional options to modify the behavior of the command.
+
+        -R:
+        Description: Recursively change the ownership of a directory and its contents.
+
+    => Permission Using Nemeric MOde 
+        chmod ugo+r directory 
+        or 
+        chmod 444 directory 
+
+        sudo user2 
+        passwod: 123456789
+        cd / 
+        cd home 
+        ls -l 
+
+        chmod 777 user2
+        ls -l                    // drwxrwxrwx 2 user2 user2 4096 Feb 21 23:03 user2
+        chmod 444 user2
+        ls -l                    // dr--r--r-- 2 user2 user2 4096 Feb 21 23:03 user2
+        chmod 755 user2
+        ls -l                    // drwxr-xr-x 2 user2 user2 4096 Feb 21 23:03 user2

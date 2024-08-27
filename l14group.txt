@@ -1,0 +1,102 @@
+=>Group 
+
+=>Display all group 
+compgen -g               (only group name)
+getent group             (group name and group id)
+cat /etc/group           (group name and group id)
+
+    *result
+    user1:x:1001:
+    user1:x:1002:
+    user1:x:1003:
+
+=>Create Group 
+sudo groupadd group1  (without message)      (or)        sudo addgroup group2 (with message)
+compgen -g
+getent group
+
+*result
+    group1:x:1004:
+    group2:x:1005:
+
+=>Create a new group with a specific group id
+
+sudo groupadd -g 3000 group3
+getent group 
+
+*result
+    group3:x:3000:
+
+(don't)
+sudo addgroup -g 4000 group4
+getent group 
+
+sudo groupadd -g 4000 group4
+sudo groupadd group5
+getent group                       (group5:x:4001:)
+sudo groupadd group6
+getent group                       (group6:x:4002:)
+
+=>Delete Group 
+sudo delgroup group6               (with message) (or) sudo groupdel group5 (without message)
+getent group 
+
+=>Created user into group 
+getent passwd
+getent group 
+
+sudo adduser user1 group1
+sudo adduser user1 group2
+
+(don't)
+sudo useradd user2 group1
+
+sudo adduser user2 group1
+sudo adduser user4 group1               (adduser: The user `user4' does not exist.)
+
+
+=>Check user's group 
+groups user1                            (user1 : user1 group1 group2)
+cat /etc/group                          
+cat /etc/group | grep user1             
+
+    *result
+    user1:x:1001:
+    group1:x:1004:user1,user2
+    group2:x:1005:user1
+
+groups user2                            (user2 : user2 group1)
+cat /etc/group | grep user2             
+
+    *result
+    user2:x:1002:
+    group1:x:1004:user1,user2
+
+=>Check group's user 
+getent group 
+getent group group1                     (group1:x:1004:user1,user2)
+cat /etc/group 
+cat /etc/group | grep group1            (group1:x:1004:user1,user2)
+cat /etc/group | grep group2            (group2:x:1005:user1)
+
+=>Using libraries to see group members 
+sudo apt-get install members
+members group1          (user1 user2)
+members group2          (user1)
+
+=>Add a user to multiple group 
+sudo usermod -aG group2,group3,group4 user2
+getent group 
+
+=>Remove user from group 
+sudo gpasswd -d user2 group3
+getent 
+sudo gpasswd -d user2 group4
+getent 
+
+=>Rename Group 
+    compge -g 
+    getent group group4
+    sudo groupmod -n group40 group4
+    compge -g 
+------------------------------------------------------------------

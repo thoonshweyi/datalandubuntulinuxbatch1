@@ -1,0 +1,64 @@
+=>UI
+     Right Click > Compress
+     Right Click > Extract
+
+     *Directly adding Under zip file
+=>Zip
+     zip l1samplezip.zip l1intro.txt
+     zip l5sample.zip l5example.txt l5file.txt l5sample.txt
+     zip l3sample.zip l3history.txt l4folder.txt myfolder9 yourfolder8
+     zip allfile.zip *        (* all/any)
+
+     *Adding by wrapping zipfilename folder
+=>Unzip (Extract Zip)
+     mkdir -p myzip
+     cp -r allfiles.zip myzip/
+     cd myzip
+     ls
+     du -h               (disk use)
+     du -h allfile.zip         
+
+     unzip allfile.zip
+
+     *Can't read zip file
+---------------------------------------------------------
+=>tar
+
+(
+     c = tar to create a new archive
+     v = set the screen output to verbose then will update
+     f = points to the filename then want to archive
+)
+
+tar cvf l1example.tar l1intro.txt 
+tar fvc l5sample.tar l5example.txt l5file.txt l5sample.txt
+tar fcv allfiles.tar *
+
+*zip file is more light weight
+*tar file is heavier than zip file
+
+=>Extract tar
+     cp -r l1example.tar myzip/
+     cd myzip
+     ls
+     du -h l1example.tar
+     tar -xvf l1example.tar
+---------------------------------------------------------
+=>gzip
+     a > a.tar > a.tar.gz
+     -can not compress to gzip directly
+     -firstly compress to tar file
+
+     du -sh l1example.tar
+     gzip -v l1example.tar
+     du -sh l1example.tar.gz // l1example.tar : 97.3 % replaced with l1example.tar.gz
+
+     *It is more lighter thant zip
+
+=>gunzip (Extract gzip)
+     gunzip -v l1example.tar.gz
+
+     =>Extract tar
+          tar xvf l1example.tar
+---------------------------------------------------------
+

@@ -1,0 +1,161 @@
+=>File
+
+=>Identifying Linux File Types
+
+-    = Regular File
+d    = Directory
+c    = Charcter Device File
+s    = Socket File
+p    = named pipe
+l    = Symbolic Link
+--------------------------------------------------
+
+=>Create File
+
+touch l5sample.txt
+
+=>Create & Edit File (cat = concatenate)
+
+cat > l5example.txt
+hello sir....
+what are you doing
+ctrl+d         
+*exit from current running session not from terminal 
+
+=>Create & Edit File
+     echo > l5sample.txt                // only create empty file 
+
+     echo "Hello Guys" > l5eg.txt       // Write string to file 
+     cat l5eg.txt
+     echo "Hello Ladies...." > l5eg.txt  
+     cat l5eg.txt                       // Overwrite the file contents
+
+=>Read File
+     cat l5example.txt        (1 to all)
+     -from start to end of the file / all contents
+
+     (or)
+     head l5example.txt       (1 to 10)
+     head -5 l5example.txt    (1 to 5)
+     head -15 l5example.txt   (1 to 15)
+
+     -from the start of the file
+     (or)
+
+     tail l5example.txt       ( 15 to 6)
+     tail -5 l5example.txt    ( 15 to 11)
+     tail -15 l5example.txt   ( 15 to 1)
+
+     -from the end of the file
+
+=>Check file status
+stat l5example.txt
+
+=>Check file type
+file l5example.txt       //  l5example.txt ASCII text
+
+=>Update File
+     =>Vim editor
+          sudo apt install vim
+
+          vim
+          -to check if vim is installed 
+          -exit from vim(:q + Enter)
+
+          vim filename.fileformat (or) vi l5example.txt
+
+          vim l5example.txt
+          :q
+
+          vim l5example.txt
+          i    (-- INSERT --)
+          what are you doing 16
+          ctrl+c
+          :qa! (for exit editor = no save = quit all buffers without a warning)
+
+          vim l5example.txt
+          i    (-- INSERT --)
+          what are you doing 16
+          ctrl+c
+          :wq (for exit editor =  saved = write & quit)
+
+          Command Feature - Writing Text Feature
+          ctrl+c for changing command area not text contents
+          i for insert text
+
+     =>nano (System Default App )
+          nano filename.format
+
+          nano l5example.txt
+          what are you doing 17
+          ctrl+x
+          y (file save & exit)
+          enter
+
+     =>gedit editor (System Default App - Text Editor)
+          gedit filename.format
+
+          sudo apt install gedit
+
+          gedit l5example.txt
+
+=>Rename File
+     mv l5example.txt l5exampletext.txt
+
+=>Remove File
+     rm -i l5exampletext.txt  (with information before you delete y/n)
+     rm -v l5sample.txt       (show message after delete)
+     rm -rf l5sample.txt
+
+     rm myfolder8             (can't delete folder)
+     rm -rf myfolder8         (can)
+
+=>Copy file
+     touch l5sample.txt
+     cp -r l5sample.txt l5samplebackup.txt
+     cp -r l5samplebackup.txt yourfolder8
+     cp -r l5sample.txt yourfolder8/
+     cp -r l5sample.txt myfolder9/myfolder10/
+
+=>Move File
+     mv l5sample.txt myfolder9/myfolder8
+     mv yourfolder8/l5samplebackup.txt myfolder9/myfolder8
+
+=>Move File & Rename File Same time
+
+     mv yourfolder8/l5sample.txt myfolder9/myfolder10/l5samplebackup2.txt
+
+=>Pipe ( | )
+ls                  //   -list
+ls -l               //   - vertical display (-l = long listing, display lots of information)
+ls -lh              //   - h = human formatted (diplay file size in a human-readable format)
+ls -lh | head       //   - Pipe (|)
+ls -lh | head -3    //   - first limited lines including -total filesize- line
+ls -lh | tail       //   - last 10 lines in the lists
+ls -lh | tail -2    //   - last limited lines in the lists
+ls -lF              (-F = Distinguish directories and files in linux)
+ls -lS              (-S = sort file by file size, biggest to smallest size)
+ls -l               (list order by name, a to z )
+ls -lt              (order by time, z to a )
+ls -l --full-time   (show by full time )
+
+=>Listing File by Type 
+
+ls -l 
+ls -F          // l11shortcut@
+ls -lF 
+
+Symbol         Meaning
+/         =    Directory 
+@         =    Link  
+*         =    Executable  
+
+=>man  (Such as Help or Browser or Documentation )
+
+ctl+alt+t
+man ls
+man mkdir
+man vim 
+man cat 
+
+q (q = quit )

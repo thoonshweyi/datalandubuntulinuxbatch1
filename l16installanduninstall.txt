@@ -1,0 +1,156 @@
+=>Install Package & Remove Package 
+
+=>Package Management System 
+    (i) apt     (Advanced Package Tool) // Debian-based systems
+    (ii) snap   // developed by Canonical, the company behind Ubuntu // cross-destributions support, always  up-to-date, huge size/dis space/resource
+
+
+    Diff: 
+        apt 
+            small file size 
+            optimized resource
+            on only use in debian-based linux os version 
+            +Fast while software running
+            -Missing some feature
+            -Manual software updates
+        snap 
+            large file size 
+            high resource 
+            can use in any linux ls version includingn Redhat, Centos
+            -Slow while software running 
+            -Fully features
+            +Always up-to-date
+=>Method 1 
+    Using the Ubuntu Software Center 
+
+=>Method 2 
+    =Finding Package Software 
+        Ctl + Alt + T 
+        dpkg -l (or) dpkg --list    (or) dpkg-query -l 
+
+    =Listing all Installed Software Package on Linux 
+        sudo apt list --installed
+
+    =Install Application 
+        sudo apt install packagename
+        sudo apt install packagename -y     (or)   sudo apt install -y packagename  (-y flag = Automatic Yes to Prompts)
+        sudo apt install -s packagename  (-s flag = Simulate Installation, which mean without actually installing the package)   
+
+        sudo apt update  (must run before install new app)
+
+
+        sudo apt install git            git -v (version control system)
+        sudo apt install curl           curl -v (command-line tool for transferring data with url)
+        sudo apt install wget                   (download files from web)
+        sudo apt install vim
+        sudo apt install vlc
+        sudo apt install aptitude       aptitude -v aptitude search 'i'(use for list install)
+        sudo apt install net-tools      ifconfig route
+        
+        sudo apt install nodejs         node -v v18.19.1
+        sudo apt install npm -y         npm -v  9.2.0
+
+        sudo apt install php            php -v      PHP 8.3.6
+
+        sudo apt install tree
+
+        =>Firewall (UFW = Uncomplicted Firewall)
+            UFW - disable default 
+
+            ufw app list 
+            ufw status 
+            ufw status numbered
+            ufw reload 
+            sudo ufw enable (Note:: beware before you enable firewall, that can lockd yourself, do not lock)
+            ufw status 
+            sudo ufw disable
+
+            sudo ufw enable
+            sudo ufw deny from 180.235.116.74       (Block an IP Address)
+            sudo ufw deny allow 180.235.116.74       (Allow an IP Address)
+
+            sudo ufw deny from 180.235.116.0/20     (Block a Subnet)
+
+
+            sudo ufw deny in on eth0 from 192.168.1.2   (Block Incoming connection to a Network Interface)
+            sudo ufw allow in on eth0 from 192.168.1.2   (Allow Incoming connection to a Network Interface)
+
+            ufw status 
+            ufw status numbered
+
+            sudo ufw delete allow from 180.235.116.74   (Delete UFW rule) 
+            sudo ufw delete 3
+
+            sudo ufw allow ssh
+            sudo ufw allow http
+            sudo ufw allow https
+
+        =>View details informatio about specific package 
+            apt show packagename        eg: apt show vlc
+
+        =>Remove Package 
+            (i) => Remove Pakage 
+                    sudo apt remove tree
+            (ii) => Remove a package ad it's configuration files
+                    sudo apt purge tree 
+            (iii) => Clean Up Unused Dependencies 
+                    sudo apt autoremove 
+
+                    =option 
+                    sudo apt-get clean 
+                    sudo apt-get --fix-broken install
+
+                    =For window 
+                    win+r
+                    prefetch
+                    temp 
+                    %temp% 
+                    recent 
+=>Method 3 
+    Facial DEB downloa file install (.deb files on Ubuntu and Debian-based Linux Distrubutions)
+
+    
+    =Installer File 
+        window - .exe
+        andriod - .apk
+
+
+    student test server 
+    ssh root@152.42.198.108 (or) ssh root@dlt.com
+    hellostudent123ABC
+
+    sudo apt-get update 
+    sudo apt-get upgrade
+ 
+
+    =>Using write Command (Individual Message)
+        write username pts/number eg. write root pts/1
+
+    =>Using echo Command (Individual Message)
+    echo "This is aung aung, how are you friend" > /dev/pts/1
+
+    =>Using wall Command (Group Message = write all send messsage to all logged-in users)
+
+    echo "Hay Guy, Everything OK ?" | sudo wall
+
+
+    => Nodejs Latest Version 
+        Go =https://nodejs.org/en/download/package-manager
+        =v20.16.0(LTS)  Linux   nvm 
+
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+
+
+        Go =https://github.com/nvm-sh/nvm
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+        
+        export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+        source ~/.bashrc
+
+        nvm -v      0.39.7
+        node -v     v20.13.1
+        npm -v      10.5.2 
+
+        nodejs       

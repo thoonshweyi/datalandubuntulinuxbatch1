@@ -1,0 +1,48 @@
+=>Create Folder or Create Directory
+     mddir =   make directory 
+
+     mkdir myfolder1
+     mkdir myfolder1     *error(mkdir: cannot create directory ‘folder1’: File exists)
+     mkdir -p myfolder2  (no error if existing, make parent directories as needed)
+     mkdir -p myfolder3/
+     cd myfolder3
+     mkdir -p myfolder4
+     cd -
+     mkdir -p myfolder5/myfolder6/myfolder7
+
+     mkdir myfolder8
+     mkdir -p myfolder9/myfolder10
+
+     *-p is is needed if you created inc sub folders
+
+=>Rename Folder (mv = move files directories or renames a file directory)
+     mv myfolder10 myfolder9
+
+=>Delete Folder or Remove Directories
+     =test.text
+     rm test.txt              (Note: -rf optional to delete files)
+     =test.text
+     rm -rf test.txt
+     
+     rm myfolder              *error (rm: cannot remove 'myfolder1': Is a directory)
+     rm -rf myfolder1         (Note: -rf need to delete directories, deletes directory forcefully.)
+
+
+     rm -rf myfolder3/myfolder4         (Note: only delete myfolder4)
+     rm -rf myfolder5                   (Note: paratent folder delete will also delete sub folders)
+
+     rmdir myfolder2
+     rmdir myfolder3/
+     rmdir -p myfolder4/
+     rmdir myfolder7/myfolder8/myfolder9/    (Note: only delete myfolder9)
+     rmdir -p myfolder7/myfolder8/           (Note: all deleted myfolder7 and myfolder8)
+
+=>Copy Folder (recursive)
+     cp -r myfolder8 yourfolder8 
+     cp -r myfolder9 yourfolder9 (Note: all sub folders inclusive)
+
+     cp -r myfolder8 myfolder9
+
+     cp -r yourfolder8 yourfolder9/yourfolder10
+     cp -r yourfolder8 yourfolder9/myfolder10
+     

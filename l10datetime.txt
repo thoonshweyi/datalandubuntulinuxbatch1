@@ -1,0 +1,37 @@
+=>Check Date 
+
+date        // Wed Mar 27 10:44:25 PM +0630 2024
+date -u     // Wed Mar 27 04:15:05 PM UTC 2024
+
+*important because user action timestapm are recored as server time in database
+
+date +"%T"  // 22:46:41
+
+date +"%d"  // 27
+date +"%D"  // 03/27/24
+date +"%F"  // 2024-03-27
+date +"%m"  // 03
+date +"%y"  // 24
+date +"%Y"  // 2024
+date +"%d-%m-%y"    // 27-03-2024
+
+
+timedatectl     
+        *result 
+        Local time: Sat 2024-07-13 10:25:45 UTC
+        Universal time: Sat 2024-07-13 10:25:45 UTC
+        RTC time: Sat 2024-07-13 10:25:45
+        Time zone: UTC (UTC, +0000)
+        System clock synchronized: yes
+        NTP service: active
+        RTC in local TZ: no
+
+=>Using cal 
+    sudo apt install ncal 
+    cal 
+    cal 2024
+    cal 2 2022
+
+
+
+

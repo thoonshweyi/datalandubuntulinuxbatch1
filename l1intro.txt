@@ -1,0 +1,40 @@
+
+
+=>Basic Line Command
+
+     ls - Lists directory contents
+     cd - Changes the current directory
+     pwd - Displays the present working directory
+     cat  - Concatenates and display file
+     echo - Display arguments to the screen
+     exit -
+
+=>Common Directories
+     /         "Root" the top of the file system
+     /bin      Binary or executable programs
+     /etc      System configuration files
+     /home     home directory. it is the default current directory
+     /opt      Optional or third-party software
+     /tmp      Temporary space, typically cleared on reboot
+     /usr      User related programs
+     /var      Variable data, most notably log files
+
+=>APT (Advanced Packaging Tool)
+
+     -application ever provide new version for new os version
+     *run following two commands before installing any application
+
+     sudo apt-get update
+     sudo apt update
+     (for package small changes)
+
+     sudo apt-get upgrade
+     sudo apt upgrade
+
+     sudo apt-get upgrade -y
+     sudo apt upgrade -y
+     (for version changes)
+
+     sudo apt-get update && sudo apt-get upgrade -y
+
+

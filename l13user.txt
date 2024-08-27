@@ -1,0 +1,314 @@
+=>For Shutdown 
+sudo poweroff 
+
+=>For restart (reboot)
+sudo reboot
+
+=>Check Current User 
+who             // administrator seat0 2024-02-28 19:40 (login screen)
+            administrator :1 2024-02-28 19:40 (:1)
+whoami          // administrator
+
+=>Check Host Name 
+hostname            // administrator // - device name
+cat /etc/hostname   // administrator
+
+=>Change Host Name 
+hostnamectl             // Window - Mycomputer > right click > Properties
+hostnamectl set-hostname KOTHA-PC 
+hostname             // KOTHA-PC 
+sudo reboot 
+
+=>Server Uptime
+
+uptime              // 16:19:30 up 16 min, 1 user, load average: 0.06, 0.10, 0.11
+                    //              onduration, concurrent user login count, cpu usage 
+top                 // Window - task manager
+ctrl+c (exit) 
+
+w
+
+sudo apt-get install glances
+glances
+ctrl+c (exit) 
+
+=>Check 32bit processor or 64bit processor 
+uname -a                    // Linux administrator 6.2.0-39-generic #40-Ubuntu SMP Wed Jun 2 23:20:28 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+uname -i or uname -m        // x86_64
+getconf LONB_BIT            // 64
+---------------------------------------------
+=>Check Ubuntu Version 
+hostnamectl              // detail info....
+cat /etc/os-release      // detail info....
+cat /etc/issue           //Ubuntu 22.04.3 LTS \n \l
+---------------------------------------------
+=>Upgrade New OS Version 
+hostnamectl 
+do-release-upgrade -c (Check for a new Ubuntu release version before upgrade)
+sudo do-release-upgrade (upgrade)
+----------------------------------------------
+
+=>Login as Root User 
+apt-get update // l3: Permission denied 
+
+sudo -s 
+(Enter administrator user password  )     // root@administrator: /home/administrator#
+apt-get update 
+exit 
+
+(or)
+sudo su 
+apt-get update
+whoami         // root 
+exit 
+
+=>Setpassword or Changing root's password 
+sudo passwd root 
+New password : 123456789
+Retype new passwoard : 123456789
+
+
+=>Login as Root User 
+=Method 1
+sudo -s             // root@administrator:/home/administrator# (don't need to write password)
+whoami              // root
+exit
+
+=Method 2
+sudo su             // root@administrator:/home/administrator# (don't need to write password)           
+whoami
+exit
+
+=Method 3           (su = switch user)
+su -                    // root@administrator:~#  (at /root folder)
+password: 123456789
+whoami
+su administrator
+
+ls                      // snap 
+
+=Method 4
+su                      // root@administrator:/home/administrator# (at /home/administrator)
+password: 123456789
+whoami
+exit
+
+cd 
+ls                      // snap 
+cd snap
+ls
+
+=>Changing Password of Current User 
+
+su
+password: 123456789
+whoami
+
+passwd 
+Current password: 123456789
+New password: 123456789abc
+Retype new password: 123456789abc
+
+su
+password: 123456789             // su: Authentication failure 
+su
+password: 123456789abc   
+
+=>Create New User Account
+=Method 1
+sudo useradd user1       (just created account, without user1 folder)
+
+whoami 
+ls 
+cd /
+ls 
+cd home 
+ls              (administrator)
+cd administrator
+ls
+
+=Method 2
+sudo useradd user2 -m    (cd /, cd home, ls = you will see system created user2 folder in under home folder)
+sudo useradd user3 -m  
+
+ls 
+cd /
+ls 
+cd home
+ls              (administrator user2), this user2 is folder not user acc
+
+=>Display all users 
+compgen -u                                   (only username)
+getent passwd (or) cat /etc/passwd            (all info)
+
+=>Display single user
+getent passwd user1      (single user all info)
+id                       (current login user group detail info) // uid=1000(administrator) gid=1000(administrator) groups=1000(administrator),27(sudo)
+id user1                 (single user group info)               // uid=1001(user1) gid=1001(user1) groups=1001(user1)
+
+=>Set new user password in terminal
+sudo passwd user1 
+New password : 123456789
+Retype new passwoard : 123456789
+
+sudo passwd user2 
+New password : 123456789
+Retype new passwoard : 123456789
+
+=>Switch user in terminal 
+su user1
+passwod : 123456789
+whoami                  // user1 
+exit 
+
+su user2
+passwod : 123456789
+whoami                  // user2
+exit 
+
+    ls -l 
+    su user1 
+    assword: 123456789
+    whoami                  
+    cd /
+    ls 
+    cd home 
+    ls -l
+    cd administrator            // error can't access (cd: an't cd to administrator)
+    cd user2                    // error can't access (cd: an't cd to user2)
+    mkdir user1                 // error (mkdir: cannot create directory 'user1': Permission denied)
+    ls 
+    exit
+
+    ls -l 
+    su user2 
+    password: 123456789
+    whoami 
+    cd /
+    ls 
+    cd home 
+    ls -l
+    cd administrator              // error can't access
+    cd user3                      // error can't access
+    cd user2
+    mkdir userfolder2              
+    echo "Hello" > file0.txt
+    ls 
+    exit
+
+    ls -l 
+    su user3 
+    password: 123456789
+    whoami 
+    cd /
+    ls 
+    cd home 
+    ls -l
+    cd administrator              // error can't access
+    cd user2                      // error can't access
+    cd user3
+    mkdir userfolder3              
+    echo "Hello" > file0.txt
+    ls 
+    exit
+
+=>Delete User 
+=Method1
+sudo deluser user2  (or) sudo userdel user1     (delete user without deleting user files and directories) 
+
+=Method2
+sudo deluser --remove-home user3                (delete user by deleting user files and directories under home folder)
+
+
+id user2            // id: 'user2': no such user
+compgen -u      
+cd /
+ls
+cd home 
+ls -l               (result = remain only administrator user2 folders)
+
+
+sudo useradd user1  (without message/ without password/ without info)
+compgen -u 
+
+sudo adduser user2 (with message/ with password/ with info)
+compgen -u 
+
+*don't
+sudo adduser user3 -m 
+
+sudo useradd user3 -m 
+compgen -u 
+=sudo passwd user3
+New password = 123456789
+Retype new password = 123456789
+=su suer3 
+password = 123456789
+whoami      // user3
+exit 
+whoami      // administrator
+
+=>Lock or Unlock 
+sudo passwd -l user3          (Lock)
+sudo passwd -u user3          (Unlock)
+
+=sudo passwd -l user3 
+su suer3 
+password = 123456789          (su: Authentication failure) - password aleardy changed by the system in background
+whoami          // administrator
+
+=sudo passwd -u user3
+su suer3 
+password = 123456789          (- password already resetd by the system in background)
+whoami          // user3
+exit 
+
+
+=>Rename User 
+    compgen -u
+    sudo useradd user4 -m       // create user          sudo useradd user5 -m 
+    sudo passwd user4           // create passwod       sudo passwd user5   
+    new passwod: 123456789
+    retype new password: 123456789 
+
+    whoami
+    cd /
+    ls
+    cd home 
+    ls -l
+    cd
+
+    su user4                su user5
+    passwod = 123456789
+    whoami 
+    exit 
+    whoami
+
+    =Method1            (user name changed - but home/directory will not change)
+    sudo usermod -l user40 user4 
+
+    =Method1            (user name changed - but home/directory will change)
+    sudo usermod -l user50 -d /home/user50 -m user5 
+
+    cd /
+    ls
+    cd home 
+    ls -l
+    cd
+    *result 
+    drwxr-x---  2   user40  user4               user4       // home folder didn't change 
+    drwxr-x---  2   user50  user5               user50      // hoome folder changed
+
+    su user40                
+    passwod = 123456789
+    whoami 
+    exit 
+    whoami                  cd  pwd (/home/user4)
+
+    su user50                
+    passwod = 123456789
+    whoami 
+    exit 
+    whoami                   cd  pwd (/home/user50)
+
+    compgen -u  (user40 user50)

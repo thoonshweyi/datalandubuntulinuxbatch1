@@ -1,0 +1,98 @@
+=>Folder Navigation
+
+     .         = This directory
+     ..        = This parent directory
+     cd        = Go to next directory
+     cd -      = Change to the previous directory
+     /         = Directory separator (forward slash)
+
+ =>Check current
+     pwd            /home/administrator
+     ls   
+     ls ..          // administrator
+     ls ../..       // bin dev lib libx32 mnt root snap sys var boot etc ...
+
+
+     ctrl+alt+t
+     ls             
+     cd Music/
+     ls
+     cd folderone/
+     ls
+     cd 1/
+     ls
+     cd ..               // 1
+     ls
+     cd ..               // folderone 'folder two'
+     ls
+     pwd                 // /home/administrator/Music
+     cd "folder two" 
+     ls
+     cd ..
+     pwd                 // /home/administrator/Music
+     cd folder\ two
+
+     ctrl+alt+t
+     ls
+     cd Music/
+     ls 
+     cd folderone/
+     ls
+     cd 1/
+     ls
+     cd                  
+     pwd                           // /home/administrator
+
+     ctrl+alt+t
+     ls
+     cd Music/
+     ls 
+     cd folderone/
+     ls
+     cd 1/
+     ls
+     cd -                 // /home/administrator/Music/folderone
+     cd -                 // /home/administrator/Music/folderone/1
+     cd -                 // /home/administrator/Music/folderone
+     cd -                 // /home/administrator/Music/folderone/1
+     
+
+     ctrl+alt+t
+     ls
+     cd Music/
+     ls 
+     cd folderone/
+     ls
+     cd 1/
+     ls
+     cd --               // /home/administrator ( adminstrator@hp:~$ )
+
+     ctrl+alt+t
+     ls
+     cd Music/
+     ls 
+     cd folderone/
+     ls
+     cd 1/
+     ls
+     cd /                //   / ( adminstrator@hp:/$ )
+     (Note: under Root folder)
+
+     
+     -----------------
+
+     *path are case sensitive
+     *Tab key to automatic text
+     *no need to enter directory from the starting root, can open directory from the current directory
+
+     *default path is home/user (~)
+     *root path is (/)
+
+     *difference between cd -- , cd /
+     cd --
+          Under user's home
+     cd /
+          Under root
+
+
+          

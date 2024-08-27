@@ -1,0 +1,75 @@
+=>History Command
+
+
+=>Clear Terminal
+
+     clear
+     ctl+m+l       (clear)
+
+     ctl+m         (New Line)
+     ctl+l         (clear)
+
+=>Close Terminal
+     exit
+     ctl+d
+
+=>Cursor to start char in Terminal
+     ctl+a
+
+=>Cursor to end char in Terminal
+     ctl+e
+
+=>Find used commands again
+     ctl+r
+     enter (if you want to use)
+     ctl+g (if you wan to cancle)
+
+=>Command Callback
+     Press up arrow key       (callback)
+     Press down arrow key     (callback)
+     !!                       (callback last command and run again)
+     history                  (see all commands history)
+     hitory 5                 (see last 5 commands history) * last five comands
+     !1453                    (callback history form commands history and run again)
+     !1457:p                  (get command from commands history just print )
+     history -c               (clear all history)
+
+
+     Diff 'clear' and 'history -c'
+          clear - clearn user interface / command on terminal 
+          history -c 
+=>wget
+     wget https://storage.googleapis.com/pod_public/1300/150537.jpg
+     ls
+
+     *image will downloaded to the current directory
+
+=>Check all history in .bash_history file
+ctl+alt+t
+ls
+ls -l
+ls -a                  - all file (hidden file included)
+ls -l -a
+ls -la or ls -al
+ls -lah or ls -alh
+cat .bash_history
+vim .bash_history
+     ctl+c
+     :qa
+
+*all command written in terminal
+
+=>Ignore Space & Ignore Multi imes
+ls -l -a
+history
+ ls -la
+history
+cd
+cd
+cd
+cd
+cd
+history
+
+- prefix space command is not recorded in history
+- if type many times ! history recorded only one time

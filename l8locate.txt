@@ -1,0 +1,26 @@
+=>locate (need to install)
+
+sudo apt install plocate
+
+cd /var/lib/plocate
+ls                      // CACHEDIR.TAG     plocate.db
+cat plocate.db           (cat: plocate.db: Permission denied)
+sudo cat plocate.db      (binary data)
+
+sudo updatedb            (refresh database to recognize the file and folder structure on the machine by the system)
+
+locate l5file
+locate -i l5file            (-i mean = no case sensitive)
+locate -i 'l5file'
+
+locate -i "l5file.txt"
+locate "l5file.txt"
+locate "L5file"         (no result)
+locate -i "L5file"
+
+locate -i "*l5file*"
+locate -i *l5file*
+locate -i "*l5file"     (no result)
+locate -i "l5file*"     (no result)
+locate -i l5file*
+--------------------------------------------------

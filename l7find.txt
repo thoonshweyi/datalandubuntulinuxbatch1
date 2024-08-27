@@ -1,0 +1,17 @@
+=>find 
+-find file
+
+ctrl+alt+t
+find 
+ctrl+c (to stop finding)
+*It take a little bit of time cuz there are my files under user's home folder
+
+Terminal: ~/Documents/Ubuntubatch1
+find .
+*It is quicker than scanning in homefolder cuz it quikly scan in specific folder
+
+find -name l5file.txt
+find -name "*l5file*"
+find -name "l5file*"
+find -name "*l5file"     (no result - because it end with .txt extension not l5file)
+---------------------------------------------------------------------

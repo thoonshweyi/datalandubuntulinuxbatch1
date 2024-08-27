@@ -1,0 +1,399 @@
+=>File Permission 
+
+compgen -u
+
+sudo useradd user10 -m
+sudo passwd user10
+new password = 123456789
+retry new password = 123456789
+
+     whoami         // administrator 
+     cd / 
+     ls 
+     cd home 
+     ls -l 
+     cd uder10      // bash: cd: user10: Permission denied
+     exit 
+
+     su - 
+     password: 123456789abc
+     whoami         // root 
+     cd /
+     ls 
+     cd home 
+     ls -l 
+     cd user 10     // can access 
+     pwd            // /home/user10
+     exit
+
+     su user10 
+     password: 123456789
+     whoami    // user10 
+     cd /
+     ls 
+     cd home 
+     ls -l 
+     cd user 10          // can access 
+     pwd                 // /home/user10
+     cd / 
+     exit 
+
+     whoami
+     cd / 
+     cd home 
+     ls -l
+     cd user10           // bash: cd: user10: Permission denied
+     chmod g-x user10    // chmod: changig permissions of "user10": Operation not permitted
+=>remove permission
+su user10 
+123456789
+whoami    // user10 
+     =remove group permission
+     cd /
+     ls 
+     cd home 
+     ls -l 
+     chmod g-r user10
+     chmod g-w user10
+     chmod g-x user10
+     ls -l 
+
+     cd user10 // can access 
+     pwd
+     cd / 
+     cd home 
+     ls -l 
+     whoami    // user10 
+
+     =remove other permission
+     chmod o-r user10
+     chmod o-w user10
+     chmod o-x user10
+
+     cd user10 // can access 
+     pwd 
+     cd / 
+     cd home 
+     ls -l 
+     whoami    // user10 
+
+     =remove user permission
+     chmod u-r user10 // can access 
+     chmod u-w user10 // can access 
+     chmod u-x user10 // can't cd to user10 
+
+     cd user10 // can access 
+     pwd 
+     cd / 
+     cd home 
+     ls -l 
+     whoami    // user10 
+
+=>Add Permission 
+     whoami    // user10 
+
+     =add other permission
+     chmod o+r user10 
+     chmod o+wx user10 
+     ls -l 
+
+     =add group permission 
+     chmod g+rwx user10 
+     ls -l 
+
+     =add user permission
+     chmod u+r user10 
+     chmod u+wx user10 
+     ls -l 
+
+     cd user10 // can access 
+     pwd 
+     cd / 
+     cd home 
+     ls -l 
+
+=>Remove All Permission (Per)
+     whoami    // user10 
+     chmod a-r user10                   // d-wx-wx-wx 2 user10 user10 4096 Feb 21 23:03 user10
+     chmod a+w user10                   // d--x--x--x 2 user10 user10 4096 Feb 21 23:03 user10
+     chmod a+x user10                   // d--------- 2 user10 user10 4096 Feb 21 23:03 user10
+     ls -l 
+
+=>Add All Permission 
+     whoami    // user10 
+     chmod a+r user10 
+     chmod a+w user10 
+     chmod a+x user10 
+     ls -l 
+
+=>Remove/Add All Permission 
+     whoami    // user10 
+     chmod a-rwx user10
+     ls -l 
+     chmod a+rwx user10 
+     ls -l 
+
+
+     su user10
+     password: 123456789
+     chmod g-rwx user10
+     exit 
+
+     whoami              // administrator
+     cd /
+     cd home 
+     ls -l 
+     cd user10 
+     ls 
+     mkdir folder2byadmin 
+     ls 
+     cd 
+
+     su user10 
+     passwod: 123456789
+     chmod o-rwx user10
+     ls -l 
+     exit 
+
+     whoami              // administrator
+     cd /
+     cd home 
+     ls -l 
+     cd user10           // bash: cd: user10: Permission denied
+------------------------------------
+=>Files Permission for Group Members
+
+compgen -u
+compgen -g 
+
+su user10
+passwod: 123456789
+cd /
+cd home 
+ls -l 
+chod g+rwx user10
+exit
+
+su user2
+passwod: 123456789
+cd /
+cd home 
+ls -l
+cd user10      // Permisson denied
+exit 
+
+compgen -g
+groups user10            (check owner)
+getent group user10
+members user10           
+
+sudo adduser user2 user10
+
+getent group user10
+members user10           // user10 user2
+
+su user2
+123456789
+cd /
+cd home 
+ls -l
+cd user10     
+ls 
+mkdir folder3byuser2
+ls
+rm -rf folder2byadmin
+ls
+exit 
+
+sudo gpasswd -d user2 user10
+members user10 
+
+su user2
+123456789
+cd /
+cd home 
+ls -l
+cd user10           // Permisson denied
+exit 
+
+------------------------------------------------------------
+=homework 
+mygroup   = new group
+user10    = adding user10 > mygroup 
+user2     = adding user2 > mygroup 
+accessing user10 folder from user2 acc 
+
+
+sudo addgroup mygroup (with message)  (or) sudo groupadd mygroup (without message) 
+compgen -g
+getent group mygroup          // mygroup:x:4003
+sudo adduser user10 mygroup   
+getent group mygroup          // mygroup:x:4003:user10
+sudo adduser user2 mygroup   
+getent group mygroup          // mygroup:x:4003:user10,user2
+
+su user2 
+Password: 123456789
+cd /
+ls 
+cd home 
+ls -l
+cd user10           // Permisson denied
+------------------------------------------------------------
+
+sudo addgroup mygroup (with message)  (or) sudo groupadd mygroup (without message) 
+compgen -g
+groups mygroup      // (see owner) groups: 'mygroup': no such user 
+
+getent group mygroup          // mygroup:x:4003
+members mygroup
+
+sudo adduser user10 mygroup   
+sudo adduser user2 mygroup   
+
+getent group mygroup          // mygroup:x:4003:user10,user2       
+members mygroup               // user10 user2
+
+su user10
+passwod: 123456789
+cd /
+cd home 
+ls -l
+cd user10  
+pwd 
+exit
+
+
+su user2
+passwod: 123456789
+cd /
+cd home 
+ls -l
+cd user10      // Permisson denied
+exit 
+
+
+=>Change Group Ownership (chgrp = change group ownership) (-R = Recursively, to recursively change group ownership of all files and directories under a given directory)
+
+     Syntax: sudo chgrp -R groupname directory
+     sudo chgrp -R user3 user3
+
+     su user2
+     passwod: 123456789
+     cd /
+     cd home 
+     ls -l
+     cd user10      // Permisson denied
+     sudo chgrp -R user2 user10    // user2 is not in sudoers file.
+     exit 
+
+
+     whoami         // administrator
+     cd /
+     cd home 
+     ls -l                         // drwxrwx--- 2 user10 user10 4096 Feb 21 23:03 user10
+     sudo chgrp -R user2 user10 
+     ls -l                         // drwxrwx--- 2 user10 user2 4096 Feb 21 23:03 user10
+     exit 
+
+
+     su user2
+     passwod: 123456789
+     cd /
+     cd home 
+     ls -l
+     cd user10
+     pwd 
+     exit 
+
+
+
+     su user3
+     passwod: 123456789
+     cd /
+     cd home 
+     ls -l
+     cd user10                // Permisson denied
+     pwd 
+     exit 
+
+     getent group mygroup          // mygroup:x:4003:user10,user2       
+     members mygroup     
+
+     sudo adduser user3 mygroup   
+
+     getent group mygroup          // mygroup:x:4003:user10,user2       
+     members mygroup               // user10 user2 user3 
+
+     whoami                        // administrator
+     cd /
+     cd home 
+     ls -l                         // drwxrwx--- 2 user10 user2 4096 Feb 21 23:03 user10
+     sudo chgrp -R mygroup user10
+     ls -l                         // drwxrwx--- 2 user10 mygroup 4096 Feb 21 23:03 user10
+
+
+     su user3
+     passwod: 123456789
+     cd /
+     cd home 
+     ls -l
+     cd user10               
+     pwd            
+     exit 
+
+
+     whoami                        // administrator
+     cd /
+     cd home 
+     ls -l                         // drwxrwx--- 2 user10 mygroup 4096 Feb 21 23:03 user10
+     sudo chgrp -R user10 user10
+     ls -l                         // drwxrwx--- 2 user10 user10 4096 Feb 21 23:03 user10
+
+
+     su user2
+     passwod: 123456789
+     cd /
+     cd home 
+     ls -l
+     cd user10      // Permisson denied
+     exit 
+------------------------------
+=>Changing Folder Ownership 
+
+Syntax : sudo chown -R newowner:groupname directory (chown = change file owner and group)
+
+
+whoami                        // administrator
+cd /
+cd home 
+ls -l                              // drwxrwx--- 2 user10 user10 4096 Feb 21 23:03 user10
+sudo chown -R user2:user10 user10
+ls -l                              // drwxrwx--- 2 user2 user10 4096 Feb 21 23:03 user10
+
+su user2
+passwod: 123456789
+cd /
+cd home 
+ls -l
+cd user10   
+exit 
+------------------------------
+
+=> Permission Using Nemeric MOde 
+     chmod ugo+r directory 
+     or 
+     chmod 444 directory 
+
+     sudo user2 
+     passwod: 123456789
+     cd / 
+     cd home 
+     ls -l 
+
+     chmod 777 user2
+     ls -l                    // drwxrwxrwx 2 user2 user2 4096 Feb 21 23:03 user2
+     chmod 444 user2
+     ls -l                    // dr--r--r-- 2 user2 user2 4096 Feb 21 23:03 user2
+     chmod 755 user2
+     ls -l                    // drwxr-xr-x 2 user2 user2 4096 Feb 21 23:03 user2
